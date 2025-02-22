@@ -113,9 +113,4 @@ For issues and feature requests, please use the GitHub Issues page.
 
 
 **Support me on Buy Me a Coffee**
-```
-<a href="**[buymeacoffee.com/ricchen]**" target="_blank">
-  <img src="https://www.buymeacoffee.com/[Your Buy Me a Coffee ID].png" 
-       alt="Buy me a coffee" style="height: 40px; width: 120px;"/>
-</a>
-```
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](buymeacoffee.com/ricchen)
