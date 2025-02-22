@@ -108,3 +108,7 @@ MIT
 ## Support
 
 For issues and feature requests, please use the GitHub Issues page.
+
+### Donate me for more people to join this project ! 
+
+(buy me a coffee)[buymeacoffee.com/ricchen]
