@@ -1,0 +1,122 @@
+{
+  "name": "figma-agent",
+  "displayName": "Figma Agent",
+  "description": "Process Figma comments and generate development tasks automatically",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:figmaAgentSidebar"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "crypto-js": "^4.2.0",
+    "date-fns": "^2.30.0",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.3",
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "vsce": "^2.15.0",
+    "@types/chai": "^4.3.0",
+    "@types/jest": "^29.5.0",
+    "@types/nock": "^11.1.0",
+    "@types/sinon": "^10.0.0",
+    "chai": "^4.3.0",
+    "jest": "^29.5.0",
+    "nock": "^13.3.0",
+    "sinon": "^15.0.0",
+    "ts-jest": "^29.1.0",
+    "@jest/globals": "^29.5.0",
+    "mock-fs": "^5.2.0",
+    "@types/mock-fs": "^4.13.4"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "figmaAgent.fetchComments",
+        "title": "Fetch Figma Comments"
+      },
+      {
+        "command": "figmaAgent.generatePrompts",
+        "title": "Generate Development Prompts"
+      },
+      {
+        "command": "figmaAgent.exportFile",
+        "title": "Export Prompts"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "figmaAgentSidebar",
+          "title": "Figma Agent",
+          "icon": "resources/figma-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "figmaAgentSidebar": [
+        {
+          "id": "figmaComments",
+          "name": "Comments"
+        },
+        {
+          "id": "figmaPrompts",
+          "name": "Prompts"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Figma Agent",
+      "properties": {
+        "figmaAgent.apiToken": {
+          "type": "string",
+          "description": "Figma API Token"
+        },
+        "figmaAgent.exportFormat": {
+          "type": "string",
+          "enum": [
+            "json",
+            "csv",
+            "txt"
+          ],
+          "default": "json"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/figma-agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/figma-agent/issues"
+  },
+  "license": "MIT"
+}
