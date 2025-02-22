@@ -111,6 +111,4 @@ For issues and feature requests, please use the GitHub Issues page.
 
 ### Donate me for more people to join this project ! 
 
-
-**Support me on Buy Me a Coffee**
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](buymeacoffee.com/ricchen)
