@@ -67,7 +67,7 @@ export class PromptGenerator {
       } catch (error) {
         lastError = error as Error;
         this.logger.warn(`Attempt ${attempt} failed:`, error);
-        if (attempt < maxRetries) await this.delay(1000 * attempt);
+        if (attempt < maxRetries) {await this.delay(1000 * attempt);}
       }
     }
 
@@ -137,8 +137,8 @@ export class PromptGenerator {
 
     message = message.toLowerCase();
     if (urgentKeywords.some((keyword) => message.includes(keyword)))
-      return "high";
-    if (lowKeywords.some((keyword) => message.includes(keyword))) return "low";
+      {return "high";}
+    if (lowKeywords.some((keyword) => message.includes(keyword))) {return "low";}
     return "medium";
   }
 

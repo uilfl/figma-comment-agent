@@ -63,7 +63,7 @@ export class ErrorService {
     error: Error,
     context?: string
   ): FigmaAgentError {
-    if (error instanceof FigmaAgentError) return error;
+    if (error instanceof FigmaAgentError) {return error;}
 
     const details = this.categorizeError(error, context);
     return new FigmaAgentError(details);
@@ -141,7 +141,7 @@ export class ErrorService {
     }
     actions.push("Show Error Log");
 
-    vscode.window
+    void vscode.window
       .showErrorMessage(
         `${message}${suggestedAction ? ` - ${suggestedAction}` : ""}`,
         ...actions

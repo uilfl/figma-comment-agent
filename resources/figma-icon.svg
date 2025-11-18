@@ -1,0 +1,27 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#0D99FF" opacity="0.1"/>
+
+  <!-- Figma-style logo inspired design -->
+  <!-- Left circle (red) -->
+  <circle cx="42" cy="42" r="12" fill="#F24E1E"/>
+
+  <!-- Center-top circle (orange) -->
+  <circle cx="64" cy="42" r="12" fill="#FF7262"/>
+
+  <!-- Right circle (purple) -->
+  <circle cx="86" cy="42" r="12" fill="#A259FF"/>
+
+  <!-- Center circle (blue) -->
+  <circle cx="64" cy="64" r="12" fill="#1ABCFE"/>
+
+  <!-- Bottom left (green) -->
+  <circle cx="42" cy="86" r="12" fill="#0ACF83"/>
+
+  <!-- Comment icon overlay -->
+  <g transform="translate(48, 72)">
+    <rect x="0" y="0" width="32" height="24" rx="4" fill="white" stroke="#0D99FF" stroke-width="2"/>
+    <line x1="6" y1="8" x2="26" y2="8" stroke="#0D99FF" stroke-width="2" stroke-linecap="round"/>
+    <line x1="6" y1="16" x2="20" y2="16" stroke="#0D99FF" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

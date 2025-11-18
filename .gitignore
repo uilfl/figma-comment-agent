@@ -1,11 +1,12 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 
 # Build output
 dist/
 build/
+src/**/*.js
+src/**/*.js.map
 
 # Environment variables
 .env
@@ -14,7 +15,6 @@ build/
 
 # IDE and editor files
 .idea/
-.vscode/
 *.swp
 *.swo
 .DS_Store

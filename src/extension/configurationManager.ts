@@ -37,6 +37,39 @@ export class ConfigurationManager {
       .update("exportFormat", format, true);
   }
 
+  getOpenAIApiKey(): string {
+    const apiKey = vscode.workspace
+      .getConfiguration("figmaAgent")
+      .get<string>("openaiApiKey");
+
+    if (!apiKey) {
+      throw new Error("OpenAI API key not configured");
+    }
+    return apiKey;
+  }
+
+  async setOpenAIApiKey(apiKey: string) {
+    if (!apiKey.trim()) {
+      throw new Error("OpenAI API key cannot be empty");
+    }
+
+    await vscode.workspace
+      .getConfiguration("figmaAgent")
+      .update("openaiApiKey", apiKey, true);
+  }
+
+  getOpenAIModel(): string {
+    return vscode.workspace
+      .getConfiguration("figmaAgent")
+      .get<string>("openaiModel", "gpt-4");
+  }
+
+  async setOpenAIModel(model: string) {
+    await vscode.workspace
+      .getConfiguration("figmaAgent")
+      .update("openaiModel", model, true);
+  }
+
   getWorkspaceState<T>(key: string): T | undefined {
     return this.context.workspaceState.get<T>(key);
   }

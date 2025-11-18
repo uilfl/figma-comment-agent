@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { FigmaClient } from "../api/figmaClient";
 import { CommentProcessor } from "../services/commentProcessor";
 import { PromptGenerator } from "../services/promptGenerator";
 import { ExportService } from "../services/exportService";
@@ -16,7 +17,6 @@ export class CommandHandler {
 
   constructor(
     private commentProcessor: CommentProcessor,
-    private promptGenerator: PromptGenerator,
     private exportService: ExportService,
     private config: ConfigurationManager,
     private logger: FigmaAgentLogger
@@ -45,15 +45,27 @@ export class CommandHandler {
     try {
       await this.errorService.retryOperation(
         async () => {
-          // Fetch comments implementation here
           this.logger.info(`Fetching comments for file: ${fileId}`);
-          // Store results in this.comments
+
+          // Get Figma API token from configuration
+          const apiToken = this.config.getApiToken();
+
+          // Create Figma client and fetch comments
+          const figmaClient = new FigmaClient(apiToken);
+          const rawComments = await figmaClient.getFileComments(fileId);
+
+          // Process comments
+          this.comments = this.commentProcessor.processComments(rawComments, {
+            excludeResolved: true,
+          });
+
+          this.logger.info(`Successfully fetched ${this.comments.length} comments`);
         },
         3,
         "fetchComments"
       );
 
-      vscode.window.showInformationMessage(
+      void vscode.window.showInformationMessage(
         `Fetched ${this.comments.length} comments`
       );
     } catch (error) {
@@ -76,15 +88,27 @@ export class CommandHandler {
     try {
       await this.errorService.retryOperation(
         async () => {
-          // Generate prompts implementation here
           this.logger.info("Generating prompts...");
-          // Store results in this.prompts
+
+          // Get OpenAI configuration
+          const openaiApiKey = this.config.getOpenAIApiKey();
+          const model = this.config.getOpenAIModel();
+
+          // Create prompt generator and generate prompts
+          const promptGenerator = new PromptGenerator(openaiApiKey);
+          this.prompts = await promptGenerator.generatePrompts(this.comments, {
+            model,
+            maxRetries: 3,
+            timeoutMs: 30000,
+          });
+
+          this.logger.info(`Successfully generated ${this.prompts.length} prompts`);
         },
         3,
         "generatePrompts"
       );
 
-      vscode.window.showInformationMessage(
+      void vscode.window.showInformationMessage(
         `Generated ${this.prompts.length} prompts`
       );
     } catch (error) {
@@ -126,7 +150,7 @@ export class CommandHandler {
         );
 
         if (result.success) {
-          vscode.window.showInformationMessage(
+          void vscode.window.showInformationMessage(
             `Prompts exported to ${result.filePath}`
           );
         } else {

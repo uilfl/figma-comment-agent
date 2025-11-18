@@ -3,17 +3,29 @@
   "displayName": "Figma Agent",
   "description": "Process Figma comments and generate development tasks automatically",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "figma-agent",
   "engines": {
     "vscode": "^1.75.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Productivity",
+    "Visualization"
+  ],
+  "keywords": [
+    "figma",
+    "design",
+    "comments",
+    "automation",
+    "ai",
+    "openai",
+    "productivity",
+    "workflow"
   ],
   "activationEvents": [
     "onView:figmaAgentSidebar"
   ],
-  "main": "./dist/extension.js",
+  "main": "./dist/extension/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
@@ -26,35 +38,20 @@
   },
   "dependencies": {
     "axios": "^1.6.0",
-    "crypto-js": "^4.2.0",
-    "date-fns": "^2.30.0",
     "openai": "^4.0.0"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.1",
-    "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.3",
     "@types/node": "^18.x",
     "@types/vscode": "^1.60.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
     "eslint": "^8.52.0",
-    "glob": "^10.3.10",
-    "mocha": "^10.2.0",
     "typescript": "^5.2.2",
     "vsce": "^2.15.0",
-    "@types/chai": "^4.3.0",
     "@types/jest": "^29.5.0",
-    "@types/nock": "^11.1.0",
-    "@types/sinon": "^10.0.0",
-    "chai": "^4.3.0",
     "jest": "^29.5.0",
-    "nock": "^13.3.0",
-    "sinon": "^15.0.0",
     "ts-jest": "^29.1.0",
-    "@jest/globals": "^29.5.0",
-    "mock-fs": "^5.2.0",
-    "@types/mock-fs": "^4.13.4"
+    "@jest/globals": "^29.5.0"
   },
   "contributes": {
     "commands": [
@@ -99,6 +96,20 @@
           "type": "string",
           "description": "Figma API Token"
         },
+        "figmaAgent.openaiApiKey": {
+          "type": "string",
+          "description": "OpenAI API Key for generating prompts"
+        },
+        "figmaAgent.openaiModel": {
+          "type": "string",
+          "enum": [
+            "gpt-4",
+            "gpt-4-turbo-preview",
+            "gpt-3.5-turbo"
+          ],
+          "default": "gpt-4",
+          "description": "OpenAI model to use for generating prompts"
+        },
         "figmaAgent.exportFormat": {
           "type": "string",
           "enum": [
@@ -106,17 +117,19 @@
             "csv",
             "txt"
           ],
-          "default": "json"
+          "default": "json",
+          "description": "Default export format for prompts"
         }
       }
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/figma-agent.git"
+    "url": "https://github.com/uilfl/figma-comment-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/figma-agent/issues"
+    "url": "https://github.com/uilfl/figma-comment-agent/issues"
   },
+  "homepage": "https://github.com/uilfl/figma-comment-agent#readme",
   "license": "MIT"
 }

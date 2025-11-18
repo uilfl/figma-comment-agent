@@ -1,0 +1,40 @@
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json'
+  },
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking'
+  ],
+  rules: {
+    '@typescript-eslint/naming-convention': [
+      'warn',
+      {
+        selector: 'import',
+        format: ['camelCase', 'PascalCase']
+      }
+    ],
+    '@typescript-eslint/semi': 'warn',
+    'curly': 'warn',
+    'eqeqeq': 'warn',
+    'no-throw-literal': 'warn',
+    'semi': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_'
+      }
+    ],
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-misused-promises': 'error'
+  },
+  ignorePatterns: ['out', 'dist', '**/*.d.ts', 'jest.config.js', '.eslintrc.js']
+};

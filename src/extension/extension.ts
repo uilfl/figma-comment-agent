@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import { CommentProcessor } from "../services/commentProcessor";
-import { PromptGenerator } from "../services/promptGenerator";
 import { ExportService } from "../services/exportService";
 import { FigmaAgentLogger } from "./logger";
 import { CommandHandler } from "./commandHandler";
@@ -12,12 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
   const config = new ConfigurationManager(context);
 
   const commentProcessor = new CommentProcessor();
-  const promptGenerator = new PromptGenerator(config.getApiToken());
   const exportService = new ExportService();
 
   const commandHandler = new CommandHandler(
     commentProcessor,
-    promptGenerator,
     exportService,
     config,
     logger
@@ -36,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
         await commandHandler.fetchComments();
       } catch (error) {
         logger.error("Failed to fetch comments:", error);
-        vscode.window.showErrorMessage("Failed to fetch Figma comments");
+        void vscode.window.showErrorMessage("Failed to fetch Figma comments");
       }
     }),
 
@@ -45,7 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
         await commandHandler.generatePrompts();
       } catch (error) {
         logger.error("Failed to generate prompts:", error);
-        vscode.window.showErrorMessage("Failed to generate prompts");
+        void vscode.window.showErrorMessage("Failed to generate prompts");
       }
     }),
 
@@ -54,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
         await commandHandler.exportPrompts();
       } catch (error) {
         logger.error("Failed to export prompts:", error);
-        vscode.window.showErrorMessage("Failed to export prompts");
+        void vscode.window.showErrorMessage("Failed to export prompts");
       }
     })
   );

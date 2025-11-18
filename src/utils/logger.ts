@@ -1,3 +1,10 @@
+/**
+ * Simple console-based logger for use in services and utilities
+ * that don't depend on VSCode.
+ *
+ * For VSCode extension code, use FigmaAgentLogger from extension/logger instead,
+ * which provides better integration with VSCode's output channels and UI.
+ */
 export class Logger {
   constructor(private context: string) {}
 

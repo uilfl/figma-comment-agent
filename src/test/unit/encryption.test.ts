@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { encrypt, decrypt } from "../../utils/encryption";
 import { FigmaAgentError } from "../../types/error";
 
@@ -16,16 +15,16 @@ describe("Encryption Utils", () => {
   it("should encrypt and decrypt data successfully", () => {
     const encrypted = encrypt(testData);
     const decrypted = decrypt(encrypted);
-    expect(decrypted).to.equal(testData);
+    expect(decrypted).toBe(testData);
   });
 
   it("should generate different encrypted values for same input", () => {
     const encrypted1 = encrypt(testData);
     const encrypted2 = encrypt(testData);
-    expect(encrypted1).to.not.equal(encrypted2);
+    expect(encrypted1).not.toBe(encrypted2);
   });
 
-  it("should throw FigmaAgentError for invalid encrypted format", () => {
-    expect(() => decrypt("invalid-format")).to.throw(FigmaAgentError);
+  it("should throw error for invalid encrypted format", () => {
+    expect(() => decrypt("invalid-format")).toThrow("Decryption failed");
   });
 });

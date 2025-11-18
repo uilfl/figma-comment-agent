@@ -8,7 +8,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   resolveWebviewView(
     webviewView: vscode.WebviewView,
-    context: vscode.WebviewViewResolveContext,
+    _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
     this._view = webviewView;
@@ -21,16 +21,16 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
     // Handle messages from the webview
-    webviewView.webview.onDidReceiveMessage(async (message) => {
+    webviewView.webview.onDidReceiveMessage((message: { command: string; text: string }) => {
       switch (message.command) {
         case "alert":
-          vscode.window.showInformationMessage(message.text);
+          void vscode.window.showInformationMessage(message.text);
           return;
       }
     });
   }
 
-  private _getHtmlForWebview(webview: vscode.Webview) {
+  private _getHtmlForWebview(_webview: vscode.Webview) {
     return `
             <!DOCTYPE html>
             <html lang="en">
